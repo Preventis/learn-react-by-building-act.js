@@ -12,6 +12,10 @@ const root = document.querySelector('#mount');
 
 // This is due to we haven't yet implemented one of React's core principles:
 // Diffing the DOM structure.
+
+// Currently we are only swapping the class component in act.js
+// But we also have to check if the component should re-render
+
 // You can now switch to act.js for implementing this feature
 class CountingCounter extends Act.Component {
   constructor(props) {

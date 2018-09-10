@@ -13,6 +13,36 @@ class Component {
 }
 
 const Act = {
+  // TODO 1:
+  // Setup a tag that we can use to mark our class components
+  // and check for them in the ActDOM render-method
+  ACT_TAG: undefined,
+
+  handleClass(className, props, children) {
+    // TODO 2:
+    // Increment the class counter of ActDOM
+
+    // TODO 3:
+    // Check if there is a cached class at the current ActDOM.classCacheCounter
+    // index in ActDOM and return it if it exists
+
+    // TODO 4:
+    // If no cached class component has been found, create a new instance
+    // Set it's children property
+    // tag it with your 'ACT_TAG' (e.g. using instance.type)
+    const instance = new className(props);
+
+    // TODO 5:
+    // Update the ActDOM classCache array at the current cache counter index
+    // using the freshly created instance
+
+    // TODO 6:
+    // Do not return the application of the render function
+    // but return the instance itself, we will use the render
+    // function later on
+    return instance.render();
+  },
+
   // The signature of createElement changed to three arguments
   // we now have properties passed in as the second one
   createElement(element, properties, ...children) {
@@ -21,8 +51,10 @@ const Act = {
     // application of render()
     if (isClass(element)) {
       // Pass properties to the element constructor call
-      const instance = new element(properties);
-      return instance.render();
+      // NEW:
+      // We refactored the creation of class components
+      // to the handleClass function
+      return this.handleClass(element, properties, children);
     } else if (typeof element === 'function') {
       // Check if element is a functional component (a function)
       // and return the application of the function
@@ -96,13 +128,24 @@ const ActDOM = {
     // process of hot swapping the element
     setTimeout(() => {
       this.render(this.rootActElement, this.rootDOMElement);
-    }, 1000);
+    }, 200);
   },
 
   render(element, rootElement) {
     // Set rootActElement and rootDOMElement according to the arguments
     this.rootActElement = element;
     this.rootDOMElement = rootElement;
+
+    // TODO 7:
+    // Check if the rootActElement is tagged with the
+    // above implemented ACT_TAG
+    const isActClass = false;
+
+    // TODO 8:
+    // Use the above isActClass and distinguish between elements
+    // that need to re-render and others
+    // If rootActElement is tagged, you should first call it's render
+    // method before appending it to the rootDOMElement
     rootElement.appendChild(element);
   }
 };
