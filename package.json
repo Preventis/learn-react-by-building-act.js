@@ -7,7 +7,10 @@
     "babelify": "^10.0.0",
     "budo": "^11.3.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0"
+  },
   "scripts": {
     "start": "budo src/playground.js --live --open -- -t babelify"
   },
