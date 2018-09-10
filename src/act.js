@@ -20,28 +20,49 @@ const Act = {
   handleClass(className, props, children) {
     // Increment the class counter of ActDOM
     ActDOM.classCacheCounter++;
-
     // Check if there is a cached class at the current ActDOM.classCacheCounter
     // index in ActDOM and return it if it exists
-    if (ActDOM.classCache[ActDOM.classCacheCounter]) {
-      return ActDOM.classCache[ActDOM.classCacheCounter];
+    const componentFromCache = ActDOM.classCache[ActDOM.classCacheCounter];
+    if (componentFromCache !== undefined) {
+      const foundComponent = ActDOM.classCache[ActDOM.classCacheCounter];
+      // TODO:
+      // Update the cached component's properties
+      // const propsChanged = foundComponent.props !== props;
+      // if (propsChanged) {
+      //   foundComponent.props = props;
+      // }
+      return foundComponent;
     }
-
     // If no cached class component has been found, create a new instance
     // Set it's children property
     // tag it with your 'ACT_TAG' (e.g. using instance.type)
     const instance = new className(props);
     instance.children = children;
     instance.type = this.ACT_TAG;
-
     // Update the ActDOM classCache array at the current cache counter index
     // using the freshly created instance
     ActDOM.classCache[ActDOM.classCacheCounter] = instance;
-
     // Do not return the application of the render function
     // but return the instance itself, we will use the render
     // function later on
     return instance;
+  },
+
+  resolveChild(element, child) {
+    if (child.type === this.ACT_TAG) {
+      // TODO 1:
+      // Recursively resolve the child by calling child.render()
+    } else if (Array.isArray(child)) {
+      // TODO 2:
+      // If child as an array, recursively resolve all the children
+    } else if (typeof child === 'object') {
+      // An object indicates a DOM node, we need to use 'appendChild'
+      element.appendChild(child);
+    } else {
+      // Otherwise the child should be a simple string, we need
+      // to append to the inner HTMl of the element
+      element.innerHTML += child;
+    }
   },
 
   // The signature of createElement changed to three arguments
@@ -60,7 +81,9 @@ const Act = {
       // Check if element is a functional component (a function)
       // and return the application of the function
       // pass properties to the creation of stateless function components
-      return element(properties);
+      const statlessComponent = element(properties);
+      statlessComponent.type = this.ACT_TAG;
+      return statlessComponent;
     } else {
       // else return the code below for the ability to create
       // default DOM node elements further on.
@@ -69,14 +92,9 @@ const Act = {
       // Iterate over children and check the element type of each:
       // Object (originated from Act.createElement) or String
       children.forEach(child => {
-        if (typeof child === 'object') {
-          // An object indicates a DOM node, we need to use 'appendChild'
-          el.appendChild(child);
-        } else {
-          // Otherwise the child should be a simple string, we need
-          // to append to the inner HTMl of the element
-          el.innerHTML += child;
-        }
+        // NEW:
+        // Refactored to resolveChild method
+        this.resolveChild(el, child);
       });
 
       // Implement attribute resolution
@@ -121,15 +139,14 @@ const ActDOM = {
       this.rootDOMElement.removeChild(lastChild);
     }
 
+    // TODO:
     // Reset the classCacheCounter
     this.classCacheCounter = 0;
 
     // Trigger the render function for rootActElement on the rootDOMElement
     // to re-render the element. We use setTimeout here to illustrate the
     // process of hot swapping the element
-    setTimeout(() => {
-      this.render(this.rootActElement, this.rootDOMElement);
-    }, 200);
+    this.render(this.rootActElement, this.rootDOMElement);
   },
 
   render(element, rootElement) {
