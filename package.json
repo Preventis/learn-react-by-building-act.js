@@ -1,0 +1,16 @@
+{
+  "name": "building-actjs",
+  "version": "1.0.0",
+  "description": "Learning React by construction",
+  "main": "index.html",
+  "dependencies": {
+    "babelify": "^10.0.0",
+    "budo": "^11.3.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "budo src/playground.js --live --open -- -t babelify"
+  },
+  "author": "Guido Schmidt",
+  "license": "MIT"
+}
