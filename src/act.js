@@ -7,13 +7,12 @@ import { isClass } from './helpers.js';
 // create their own class-based components
 class Component {
   // TODO: implement passing props to the constructor
-  constructor() {
-    this.props = undefined;
+  constructor(props) {
+    this.props = props;
   }
 }
 
 const Act = {
-  // NEW:
   // The signature of createElement changed to three arguments
   // we now have properties passed in as the second one
   createElement(element, properties, ...children) {
@@ -21,17 +20,14 @@ const Act = {
     // invoke the constructor using 'new' and return the instance's
     // application of render()
     if (isClass(element)) {
-      // TODO:
       // Pass properties to the element constructor call
-      const instance = new element();
+      const instance = new element(properties);
       return instance.render();
     } else if (typeof element === 'function') {
       // Check if element is a functional component (a function)
       // and return the application of the function
-
-      // TODO:
       // pass properties to the creation of stateless function components
-      return element();
+      return element(properties);
     } else {
       // else return the code below for the ability to create
       // default DOM node elements further on.
@@ -54,7 +50,6 @@ const Act = {
     }
   },
 
-  // NEW:
   // We provide Act.Component from the class definition above ↑
   Component: Component
 };

@@ -92,17 +92,17 @@ ActDOM.render(niceTitle, root);
 
 // Class components need to use the constructor to pass in properties.
 // To ensure a predefined API, we will create a super class 'Act.Component'
-class StyledButton extends Act.Component {
+class ProppedButton extends Act.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
     const { text } = this.props;
-    return Act.createElement('h1', null, text);
+    return Act.createElement('button', null, text);
   }
 }
-const styledButton = Act.createElement(StyledButton, {
+const styledButton = Act.createElement(ProppedButton, {
   text: 'Click'
 });
 ActDOM.render(styledButton, root);
