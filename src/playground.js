@@ -98,12 +98,12 @@ class ProppedButton extends Act.Component {
   }
 
   render() {
-    const { text } = this.props;
-    return Act.createElement('button', null, text);
+    const { name } = this.props;
+    return Act.createElement('button', null, `Olà, Sr. ${name}`);
   }
 }
 const styledButton = Act.createElement(ProppedButton, {
-  text: 'Click'
+  name: 'Simon'
 });
 ActDOM.render(styledButton, root);
 
