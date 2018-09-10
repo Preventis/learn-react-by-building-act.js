@@ -4,5 +4,9 @@ const isClass = e => {
   return isFunction && isClass;
 };
 
-export { isClass };
+const isEventListener = propName => {
+  return /^on.*$/.test(propName);
+};
+
+export { isClass, isEventListener };
 

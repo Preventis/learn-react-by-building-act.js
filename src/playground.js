@@ -102,8 +102,35 @@ class ProppedButton extends Act.Component {
     return Act.createElement('button', null, `Olà, Sr. ${name}`);
   }
 }
-const styledButton = Act.createElement(ProppedButton, {
+const proppedButton = Act.createElement(ProppedButton, {
   name: 'Simon'
 });
-ActDOM.render(styledButton, root);
+ActDOM.render(proppedButton, root);
+
+// --- Exercise 06/Attributes
+// As DOM nodes also may have attributes such as class names, event listeners
+// and so on, Act (React does) should implement these concepts:
+class WorkingButton extends Act.Component {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    const { text, className, onClick } = this.props;
+    return Act.createElement(
+      'button',
+      // Attributes are passed via props
+      {
+        className: className,
+        onClick: onClick
+      },
+      `Working Button: ${text}`
+    );
+  }
+}
+const workingButton = Act.createElement(WorkingButton, {
+  text: 'Click',
+  className: 'button'
+});
+ActDOM.render(workingButton, root);
 
