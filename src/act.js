@@ -25,12 +25,11 @@ const Act = {
     const componentFromCache = ActDOM.classCache[ActDOM.classCacheCounter];
     if (componentFromCache !== undefined) {
       const foundComponent = ActDOM.classCache[ActDOM.classCacheCounter];
-      // TODO:
       // Update the cached component's properties
-      // const propsChanged = foundComponent.props !== props;
-      // if (propsChanged) {
-      //   foundComponent.props = props;
-      // }
+      const propsChanged = foundComponent.props !== props;
+      if (propsChanged) {
+        foundComponent.props = props;
+      }
       return foundComponent;
     }
     // If no cached class component has been found, create a new instance
@@ -50,11 +49,11 @@ const Act = {
 
   resolveChild(element, child) {
     if (child.type === this.ACT_TAG) {
-      // TODO 1:
       // Recursively resolve the child by calling child.render()
+      this.resolveChild(element, child.render());
     } else if (Array.isArray(child)) {
-      // TODO 2:
       // If child as an array, recursively resolve all the children
+      child.forEach(child => this.resolveChild(element, child));
     } else if (typeof child === 'object') {
       // An object indicates a DOM node, we need to use 'appendChild'
       element.appendChild(child);
@@ -140,7 +139,10 @@ const ActDOM = {
     }
 
     // Reset the classCacheCounter
-    this.classCacheCounter = 0;
+    // FIX:
+    // We need to reset the counter to 1 — the first class should
+    // always get rendered (due to correct passing of state and props)
+    this.classCacheCounter = 1;
 
     // Trigger the render function for rootActElement on the rootDOMElement
     // to re-render the element. We use setTimeout here to illustrate the
