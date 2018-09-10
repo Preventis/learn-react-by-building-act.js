@@ -8,5 +8,9 @@ const isEventListener = propName => {
   return /^on.*$/.test(propName);
 };
 
-export { isClass, isEventListener };
+const getEvent = propName => {
+  return propName.substring(2).toLowerCase();
+};
+
+export { isClass, isEventListener, getEvent };
 

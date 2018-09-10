@@ -48,18 +48,20 @@ const Act = {
 
       // TODO:
       // Implement attribute resolution
+      // Use Object.keys to loop over all property names
       // 1. Check properties to be not null or undefined
       // 2. If properties is defined, check each property
       // 2a. If it's an event listener (HINT: use isEventListener helper)
       //     → Use .addEventListener on the element
       // 2b. If it's not an event listener
       //     → use .setAttribute on the element
-      if (properties !== null && properties !== undefined) {
-        // HINT:
-        // Use Object.keys to loop over all property names
-        // HINT:
-        // Use isEventListener helper
-      }
+      //
+      // HINT:
+      // Use 'isEventListener' and 'getEvent' helper functions
+      //
+      // TODO:
+      // Make sure to check if all properties named 'className' are
+      // substituted with 'class' before using .setAttribute
 
       return el;
     }

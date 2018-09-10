@@ -120,6 +120,8 @@ class WorkingButton extends Act.Component {
     return Act.createElement(
       'button',
       // Attributes are passed via props
+      // As javascript reserves the name 'class' we have to use 'className'
+      // as placeholder to set the class attribute in Act.js
       {
         className: className,
         onClick: onClick
@@ -130,7 +132,8 @@ class WorkingButton extends Act.Component {
 }
 const workingButton = Act.createElement(WorkingButton, {
   text: 'Click',
-  className: 'button'
+  className: 'button-primary',
+  onClick: () => alert("It's working!")
 });
 ActDOM.render(workingButton, root);
 
