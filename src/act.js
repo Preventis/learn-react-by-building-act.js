@@ -3,7 +3,7 @@ const root = document.querySelector('#mount');
 
 const Act = {
   createElement(element, content) {
-    console.log('Please implement the creation of elements');
+    console.log("Please implement Act's creation of elements");
     // TODO:
     // Make use of document.createElement to create a DOM node
     // of the argument type 'element'.
@@ -18,7 +18,7 @@ const Act = {
 
 const ActDOM = {
   render(element, rootElement) {
-    console.log('Please implement the rendering');
+    console.log('Please implement ActDOM rendering');
     // TODO:
     // Append element as a child to the rootElement
   }
