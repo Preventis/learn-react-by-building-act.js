@@ -3,16 +3,15 @@ import { isClass } from './helpers.js';
 
 const Act = {
   createElement(element, ...children) {
-    // Check if element is a functional component (a function)
-    // and return the application of the function
-
-    // TODO:
-    // Additionally check if the element is a javascript class and if so,
+    // Check if the element is a javascript class and if so,
     // invoke the constructor using 'new' and return the instance's
     // application of render()
-    // HINT:
-    // You can use isClass from the helpers.js module to check for classes
-    if (typeof element === 'function') {
+    if (isClass(element)) {
+      const instance = new element();
+      return instance.render();
+    } else if (typeof element === 'function') {
+      // Check if element is a functional component (a function)
+      // and return the application of the function
       return element();
     } else {
       // else return the code below for the ability to create
