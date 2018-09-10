@@ -130,7 +130,8 @@ class WorkingButton extends Act.Component {
 }
 const workingButton = Act.createElement(WorkingButton, {
   text: 'Click',
-  className: 'button'
+  className: 'button-primary',
+  onClick: () => alert("It's working!")
 });
 ActDOM.render(workingButton, root);
 

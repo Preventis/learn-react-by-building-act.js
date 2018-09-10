@@ -1,5 +1,5 @@
 // This will be our file to implement our own React.js — called Act.js
-import { isClass, isEventListener } from './helpers.js';
+import { isClass, isEventListener, getEvent } from './helpers.js';
 
 // NEW:
 // The Component class is defined to ensure a predefined API
@@ -46,7 +46,6 @@ const Act = {
         }
       });
 
-      // TODO:
       // Implement attribute resolution
       // 1. Check properties to be not null or undefined
       // 2. If properties is defined, check each property
@@ -55,10 +54,16 @@ const Act = {
       // 2b. If it's not an event listener
       //     → use .setAttribute on the element
       if (properties !== null && properties !== undefined) {
-        // HINT:
-        // Use Object.keys to loop over all property names
-        // HINT:
-        // Use isEventListener helper
+        Object.keys(properties).forEach(propName => {
+          if (isEventListener(propName)) {
+            const handler = properties[propName];
+            el.addEventListener(getEvent(propName), handler);
+          } else {
+            const attributeValue = properties[propName];
+            const fixedPropName = propName === 'className' ? 'class' : propName;
+            el.setAttribute(fixedPropName, attributeValue);
+          }
+        });
       }
 
       return el;
