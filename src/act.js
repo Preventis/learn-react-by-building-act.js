@@ -8,8 +8,6 @@ class Component {
 
   setState(newState) {
     this.state = newState;
-    // TODO 1:
-    // 1. Implement TODOS in ActDOM.reRender()
     ActDOM.reRender();
   }
 }
@@ -77,22 +75,22 @@ const Act = {
 };
 
 const ActDOM = {
-  // TODO:
-  // Add global variables for
-  // - rootActElement
-  // - rootDOMElement
-  // - classCache (Array)
-  // - classCacheCounter (Int)
+  rootActElement: undefined,
+  rootDOMElement: undefined,
+  classCache: [],
+  classCacheCounter: 0,
 
   reRender() {
-    // TODO:
     // As long as the global var rootDOMElement has child nodes
     // remove the last child
+    while (this.rootDOMElement.hasChildNodes()) {
+      const lastChild = this.rootDOMElement.lastChild;
+      this.rootDOMElement.removeChild(lastChild);
+    }
 
-    // TODO:
     // Reset the classCacheCounter
+    this.classCacheCounter = 0;
 
-    // HINT:
     // Trigger the render function for rootActElement on the rootDOMElement
     // to re-render the element. We use setTimeout here to illustrate the
     // process of hot swapping the element
@@ -102,8 +100,9 @@ const ActDOM = {
   },
 
   render(element, rootElement) {
-    // TODO:
     // Set rootActElement and rootDOMElement according to the arguments
+    this.rootActElement = element;
+    this.rootDOMElement = rootElement;
     rootElement.appendChild(element);
   }
 };
