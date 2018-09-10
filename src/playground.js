@@ -65,11 +65,18 @@ class Counter {
   // that uses Act.createElement
   render() {
     // We build a (not yet functional) structure to implement a counter
-    const heading = Act.createElement('h1', null, 'A Counter');
+    const title = Act.createElement('h1', null, 'A Counter');
     const minusButton = Act.createElement('button', null, '-');
     const plusButton = Act.createElement('button', null, '+');
     const value = Act.createElement('h3', null, 0);
-    return Act.createElement('div', null, minusButton, value, plusButton);
+    return Act.createElement(
+      'div',
+      null,
+      title,
+      minusButton,
+      value,
+      plusButton
+    );
   }
 }
 const firstCounter = Act.createElement(Counter);
@@ -134,4 +141,77 @@ const workingButton = Act.createElement(WorkingButton, {
   onClick: () => alert("It's working!")
 });
 ActDOM.render(workingButton, root);
+
+// --- Exercise 07/State
+// React components get data passed in via properties. The real power
+// of react comes when using local state in components.
+// Only Stateful Class Components are capable of using state:
+class CountingCounter extends Act.Component {
+  constructor(props) {
+    super(props);
+    // Define state as a simple object in your component class
+    this.state = {
+      value: 0
+    };
+  }
+
+  decrement() {
+    // TOOD:
+    // Use your implementation of Act.Component's setState
+    // function in order to update the state of this class component
+    console.log(this.state.value);
+  }
+
+  increment() {
+    // TOOD:
+    // Use your implementation of Act.Component's setState
+    // function in order to update the state of this class component
+    console.log(this.state.value);
+  }
+
+  render() {
+    // Destructure the classes state value
+    const { value } = this.state;
+    const title = Act.createElement('h1', null, 'A Working Counter');
+    const subtractButton = Act.createElement(
+      'button',
+      {
+        className: 'two columns',
+        // Use .bind(this) on the event handlers of the class to
+        // ensure a valid 'this' context. Otherwise we'd lose the 'this' context
+        // of the class in the actual event handling function
+        onClick: this.decrement.bind(this)
+      },
+      '-'
+    );
+    const valueText = Act.createElement(
+      'h3',
+      { className: 'three columns' },
+      // Here we use the value from the state, as destructured above
+      `Value: ${value}`
+    );
+    const addButton = Act.createElement(
+      'button',
+      {
+        className: 'two columns',
+        onClick: this.increment.bind(this)
+      },
+      '+'
+    );
+    return Act.createElement(
+      'div',
+      { className: 'row' },
+      title,
+      subtractButton,
+      valueText,
+      addButton
+    );
+  }
+}
+// HINT:
+// Currently the state gets updated properly (have a look at the console),
+// but the DOM does not update, we need to handle re-rendering on state changes
+// → Implement it in act.js
+const workingCounter = Act.createElement(CountingCounter);
+ActDOM.render(workingCounter, root);
 

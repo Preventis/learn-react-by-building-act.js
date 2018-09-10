@@ -6,9 +6,14 @@ import { isClass, isEventListener, getEvent } from './helpers.js';
 // for component class construction. Users can subclass it to
 // create their own class-based components
 class Component {
-  // TODO: implement passing props to the constructor
   constructor(props) {
     this.props = props;
+  }
+
+  setState(newState) {
+    // TODO:
+    // Implement 'setState' function to update the state and wrap
+    // a call to DOM re-rendering
   }
 }
 
