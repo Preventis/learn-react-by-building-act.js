@@ -12,8 +12,7 @@ class Component {
 
   setState(newState) {
     // TODO:
-    // Implement 'setState' function to update the state and wrap
-    // a call to DOM re-rendering
+    // Implement 'setState' function to update the state
   }
 }
 
