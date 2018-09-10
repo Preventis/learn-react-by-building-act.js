@@ -13,34 +13,35 @@ class Component {
 }
 
 const Act = {
-  // TODO 1:
   // Setup a tag that we can use to mark our class components
   // and check for them in the ActDOM render-method
-  ACT_TAG: undefined,
+  ACT_TAG: 'ACT_CLASS_COMPONENT',
 
   handleClass(className, props, children) {
-    // TODO 2:
     // Increment the class counter of ActDOM
+    ActDOM.classCacheCounter++;
 
-    // TODO 3:
     // Check if there is a cached class at the current ActDOM.classCacheCounter
     // index in ActDOM and return it if it exists
+    if (ActDOM.classCache[ActDOM.classCacheCounter]) {
+      return ActDOM.classCache[ActDOM.classCacheCounter];
+    }
 
-    // TODO 4:
     // If no cached class component has been found, create a new instance
     // Set it's children property
     // tag it with your 'ACT_TAG' (e.g. using instance.type)
     const instance = new className(props);
+    instance.children = children;
+    instance.type = this.ACT_TAG;
 
-    // TODO 5:
     // Update the ActDOM classCache array at the current cache counter index
     // using the freshly created instance
+    ActDOM.classCache[ActDOM.classCacheCounter] = instance;
 
-    // TODO 6:
     // Do not return the application of the render function
     // but return the instance itself, we will use the render
     // function later on
-    return instance.render();
+    return instance;
   },
 
   // The signature of createElement changed to three arguments
@@ -136,17 +137,19 @@ const ActDOM = {
     this.rootActElement = element;
     this.rootDOMElement = rootElement;
 
-    // TODO 7:
     // Check if the rootActElement is tagged with the
     // above implemented ACT_TAG
-    const isActClass = false;
+    const isActClass = this.rootActElement.type === Act.ACT_TAG;
 
-    // TODO 8:
     // Use the above isActClass and distinguish between elements
     // that need to re-render and others
     // If rootActElement is tagged, you should first call it's render
     // method before appending it to the rootDOMElement
-    rootElement.appendChild(element);
+    if (isActClass) {
+      rootElement.appendChild(element.render());
+    } else {
+      rootElement.appendChild(element);
+    }
   }
 };
 
