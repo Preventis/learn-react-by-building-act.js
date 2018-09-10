@@ -52,3 +52,26 @@ const ContactForm = () => {
 const contactForm = Act.createElement(ContactForm, null);
 ActDOM.render(contactForm, root);
 
+// --- Exercise 04/Class components
+// As ES6 (Javascript) introduced the OO oriented concept of classes, React.js
+// also supports components that are build using this concept.
+
+// Act.js should also implement class components
+// A class component should look as follows:
+
+// It should inherit the Act.Component class
+class Counter {
+  // It should implement a render method
+  // that uses Act.createElement
+  render() {
+    // We build a (not yet functional) structure to implement a counter
+    const heading = Act.createElement('h1', 'A Counter');
+    const minusButton = Act.createElement('button', '-');
+    const plusButton = Act.createElement('button', '+');
+    const value = Act.createElement('h3', 0);
+    return Act.createElement('div', minusButton, value, plusButton);
+  }
+}
+const firstCounter = Act.createElement(Counter);
+ActDOM.render(firstCounter, root);
+

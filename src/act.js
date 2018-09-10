@@ -1,10 +1,17 @@
 // This will be our file to implement our own React.js — called Act.js
-const root = document.querySelector('#mount');
+import { isClass } from './helpers.js';
 
 const Act = {
   createElement(element, ...children) {
     // Check if element is a functional component (a function)
     // and return the application of the function
+
+    // TODO:
+    // Additionally check if the element is a javascript class and if so,
+    // invoke the constructor using 'new' and return the instance's
+    // application of render()
+    // HINT:
+    // You can use isClass from the helpers.js module to check for classes
     if (typeof element === 'function') {
       return element();
     } else {
