@@ -1,17 +1,36 @@
 // This will be our file to implement our own React.js — called Act.js
 import { isClass } from './helpers.js';
 
+// NEW:
+// The Component class is defined to ensure a predefined API
+// for component class construction. Users can subclass it to
+// create their own class-based components
+class Component {
+  // TODO: implement passing props to the constructor
+  constructor() {
+    this.props = undefined;
+  }
+}
+
 const Act = {
-  createElement(element, ...children) {
+  // NEW:
+  // The signature of createElement changed to three arguments
+  // we now have properties passed in as the second one
+  createElement(element, properties, ...children) {
     // Check if the element is a javascript class and if so,
     // invoke the constructor using 'new' and return the instance's
     // application of render()
     if (isClass(element)) {
+      // TODO:
+      // Pass properties to the element constructor call
       const instance = new element();
       return instance.render();
     } else if (typeof element === 'function') {
       // Check if element is a functional component (a function)
       // and return the application of the function
+
+      // TODO:
+      // pass properties to the creation of stateless function components
       return element();
     } else {
       // else return the code below for the ability to create
@@ -33,7 +52,11 @@ const Act = {
 
       return el;
     }
-  }
+  },
+
+  // NEW:
+  // We provide Act.Component from the class definition above ↑
+  Component: Component
 };
 
 const ActDOM = {
