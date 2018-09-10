@@ -139,7 +139,6 @@ const ActDOM = {
       this.rootDOMElement.removeChild(lastChild);
     }
 
-    // TODO:
     // Reset the classCacheCounter
     this.classCacheCounter = 0;
 
