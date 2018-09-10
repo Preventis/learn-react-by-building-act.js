@@ -208,10 +208,7 @@ class CountingCounter extends Act.Component {
     );
   }
 }
-// HINT:
-// Currently the state gets updated properly (have a look at the console),
-// but the DOM does not update, we need to handle re-rendering on state changes
-// → Implement it in act.js
+
 const workingCounter = Act.createElement(CountingCounter);
 ActDOM.render(workingCounter, root);
 
