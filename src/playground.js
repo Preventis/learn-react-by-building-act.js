@@ -37,18 +37,18 @@ ActDOM.render(title, root);
 // Functional stateless components can also be written using arrow functions:
 const SendButton = () => Act.createElement('button', 'Send');
 
-const ConactForm = () => {
+const ContactForm = () => {
   // Simple strings
   const message = 'Please contact us:';
   // Default DOM nodes as created by Act.js
-  const nameInput = Act.createElement('input', null);
-  const mailInput = Act.createElement('input', null);
+  const nameInput = Act.createElement('input');
+  const mailInput = Act.createElement('input');
   // Stateless components as created by Act.js
-  const button = Act.createElement(SendButton, null);
+  const button = Act.createElement(SendButton);
 
   // Return a div that has several children of different type, as defined above
   return Act.createElement('div', message, nameInput, mailInput, button);
 };
-const contactForm = Act.createElement(ConactForm, null);
+const contactForm = Act.createElement(ContactForm, null);
 ActDOM.render(contactForm, root);
 

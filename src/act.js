@@ -2,15 +2,7 @@
 const root = document.querySelector('#mount');
 
 const Act = {
-  // TODO:
-  // Rename argument 'content' to 'children', as we want to be
-  // able to render not only one child and children of different type
-
-  // HINT:
-  // With the ES6 spread operator it's dead simple to get an argument
-  // as an array - thus you don't have to implement any further argument parsing
-  // https://developer.mozilla.org/de/docs/Web/JavaScript/Reference/Operators/Spread_operator
-  createElement(element, content) {
+  createElement(element, ...children) {
     // Check if element is a functional component (a function)
     // and return the application of the function
     if (typeof element === 'function') {
@@ -20,15 +12,18 @@ const Act = {
       // default DOM node elements further on.
       const el = document.createElement(element);
 
-      // TODO:
       // Iterate over children and check the element type of each:
       // Object (originated from Act.createElement) or String
-
-      // TODO:
-      // Distinguish between the child type and use .appendChild or
-      // set .innerHTML of the above created element appropriate to the
-      // child's type
-      el.innerHTML = content;
+      children.forEach(child => {
+        if (typeof child === 'object') {
+          // An object indicates a DOM node, we need to use 'appendChild'
+          el.appendChild(child);
+        } else {
+          // Otherwise the child should be a simple string, we need
+          // to append to the inner HTMl of the element
+          el.innerHTML += child;
+        }
+      });
 
       return el;
     }
