@@ -1,10 +1,6 @@
 // This will be our file to implement our own React.js — called Act.js
 import { isClass, isEventListener, getEvent } from './helpers.js';
 
-// NEW:
-// The Component class is defined to ensure a predefined API
-// for component class construction. Users can subclass it to
-// create their own class-based components
 class Component {
   constructor(props) {
     this.props = props;
@@ -12,6 +8,9 @@ class Component {
 
   setState(newState) {
     this.state = newState;
+    // TODO 1:
+    // 1. Implement TODOS in ActDOM.reRender()
+    ActDOM.reRender();
   }
 }
 
@@ -78,8 +77,33 @@ const Act = {
 };
 
 const ActDOM = {
+  // TODO:
+  // Add global variables for
+  // - rootActElement
+  // - rootDOMElement
+  // - classCache (Array)
+  // - classCacheCounter (Int)
+
+  reRender() {
+    // TODO:
+    // As long as the global var rootDOMElement has child nodes
+    // remove the last child
+
+    // TODO:
+    // Reset the classCacheCounter
+
+    // HINT:
+    // Trigger the render function for rootActElement on the rootDOMElement
+    // to re-render the element. We use setTimeout here to illustrate the
+    // process of hot swapping the element
+    setTimeout(() => {
+      this.render(this.rootActElement, this.rootDOMElement);
+    }, 1000);
+  },
+
   render(element, rootElement) {
-    // Append element as a child to the rootElement
+    // TODO:
+    // Set rootActElement and rootDOMElement according to the arguments
     rootElement.appendChild(element);
   }
 };
