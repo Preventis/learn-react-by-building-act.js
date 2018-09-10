@@ -3,14 +3,14 @@ const root = document.querySelector('#mount');
 
 const Act = {
   createElement(element, content) {
-    // Make use of document.createElement to create a DOM node
-    // of the argument type 'element'.
+    // TODO:
+    // Check if element is a functional component (a function)
+    // and return the application of the function
+
+    // else return the code below for the ability to create
+    // default DOM node elements further on.
     const el = document.createElement(element);
-
-    // Add content to the above created node
     el.innerHTML = content;
-
-    // Then return the above element
     return el;
   }
 };

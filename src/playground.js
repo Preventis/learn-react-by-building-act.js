@@ -1,6 +1,7 @@
 // This will serve as a playground to test and try out our implementation
 // of React.js
 
+// --- Exercise 01/DOM elements
 // We separate Act.js into two modules:
 // 1. Act:    Implements the basic creation of elements
 // 2. ActDOM: Implements DOM manipulation logic
@@ -20,4 +21,15 @@ const firstElement = Act.createElement('div', 'Hello Act.js!');
 // created by Act (using the above createElement function) and a root DOM node
 // which we queried above ↑
 ActDOM.render(firstElement, root);
+
+// --- Exercise 02/Stateless Components
+// We also want to be able to create custom elements (aka. Web Components)
+// at first without any kind of state or interactivity. In the React world
+// these kind of components are also called 'Functional Components' because
+// they are basically just a function that create some bundled elements:
+const Title = function() {
+  return Act.createElement('h1', 'A Stateless Title');
+};
+const title = Act.createElement(Title, null);
+ActDOM.render(title, root);
 
