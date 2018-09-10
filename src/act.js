@@ -10,10 +10,10 @@ class Component {
     this.props = props;
   }
 
-  setState(newState) {
-    // TODO:
-    // Implement 'setState' function to update the state
-  }
+  // TODO:
+  // Implement 'setState' function to update the class state
+  // Use it in the playground subclass to update the value of the
+  // counter
 }
 
 const Act = {

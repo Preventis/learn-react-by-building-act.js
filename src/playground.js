@@ -160,6 +160,8 @@ class CountingCounter extends Act.Component {
     // Use your implementation of Act.Component's setState
     // function in order to update the state of this class component
     console.log(this.state.value);
+    if (this.state.value !== 0)
+      console.log('Success - checkout the next exercise!');
   }
 
   increment() {
@@ -167,6 +169,8 @@ class CountingCounter extends Act.Component {
     // Use your implementation of Act.Component's setState
     // function in order to update the state of this class component
     console.log(this.state.value);
+    if (this.state.value !== 0)
+      console.log('Success - checkout the next exercise!');
   }
 
   render() {
