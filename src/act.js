@@ -25,12 +25,8 @@ const Act = {
     const componentFromCache = ActDOM.classCache[ActDOM.classCacheCounter];
     if (componentFromCache !== undefined) {
       const foundComponent = ActDOM.classCache[ActDOM.classCacheCounter];
-      // TODO:
-      // Update the cached component's properties
-      // const propsChanged = foundComponent.props !== props;
-      // if (propsChanged) {
-      //   foundComponent.props = props;
-      // }
+      // TODO 3:
+      // Update the cached component's properties if they differ
       return foundComponent;
     }
     // If no cached class component has been found, create a new instance
@@ -140,6 +136,11 @@ const ActDOM = {
     }
 
     // Reset the classCacheCounter
+    // TODO 4/FIX:
+    // Reset the classCacheCounter to 1 instead of 0
+    // due to the necessity of a valid root class component in the
+    // caching structure. Otherwise we might inject the first component into
+    // itself → try by changing 0 to 1 and back
     this.classCacheCounter = 0;
 
     // Trigger the render function for rootActElement on the rootDOMElement
