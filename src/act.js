@@ -11,8 +11,7 @@ class Component {
   }
 
   setState(newState) {
-    // TODO:
-    // Implement 'setState' function to update the state
+    this.state = newState;
   }
 }
 

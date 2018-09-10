@@ -159,13 +159,14 @@ class CountingCounter extends Act.Component {
     // TOOD:
     // Use your implementation of Act.Component's setState
     // function in order to update the state of this class component
+    this.setState({ value: this.state.value - 1 });
     console.log(this.state.value);
   }
 
   increment() {
-    // TOOD:
     // Use your implementation of Act.Component's setState
     // function in order to update the state of this class component
+    this.setState({ value: this.state.value + 1 });
     console.log(this.state.value);
   }
 
@@ -208,10 +209,7 @@ class CountingCounter extends Act.Component {
     );
   }
 }
-// HINT:
-// Currently the state gets updated properly (have a look at the console),
-// but the DOM does not update, we need to handle re-rendering on state changes
-// → Implement it in act.js
+
 const workingCounter = Act.createElement(CountingCounter);
 ActDOM.render(workingCounter, root);
 
