@@ -4,6 +4,16 @@ const budo = require('budo');
 const babelify = require('babelify');
 const childProcess = require('child_process');
 
+function currentBranch(cb) {
+  childProcess.exec("git branch | grep '*'", (err, stdout) => {
+    if (err) {
+      console.log('ERROR: ', err);
+    } else {
+      cb(stdout);
+    }
+  });
+}
+
 function switchBranch(name) {
   childProcess.exec(`git checkout ${name}`, (err, stdout) => {
     if (err) {
@@ -53,7 +63,7 @@ function switchBranchWithStash(name, budo) {
   });
 }
 
-const b = budo('./src/playground.js', {
+const b = budo('./server/tutorial.js', {
   live: true,
   stream: process.stdout,
   port: 8000,
@@ -61,16 +71,20 @@ const b = budo('./src/playground.js', {
     transform: babelify
   }
 }).on('connect', function(ev) {
-  const wss = new WebSocket.Server({ port: 1337 });
+  const wss = new WebSocket.Server({ port: 4444 });
   wss.on('connection', ws => {
     ws.on('message', mess => {
       const message = JSON.parse(mess);
       console.log('→ ', message);
-      if (message.action === 'next-commit') {
-        switchBranchWithCommit(message.to, b);
-      }
-      if (message.action === 'next-stash') {
-        switchBranchWithStash(message.to, b);
+      if (message.action === 'next') {
+        currentBranch(branchName => {
+          const isSolutionBranch = branchName.includes('solution');
+          if (isSolutionBranch) {
+            switchBranchWithStash(message.to, b);
+          } else {
+            switchBranchWithCommit(message.to, b);
+          }
+        });
       }
     });
   });

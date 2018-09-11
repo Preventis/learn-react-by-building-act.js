@@ -2,12 +2,38 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8"/>
-    <title>Document</title>
+    <title>Building React</title>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" />
   </head>
   <body>
-    <button id="btn-next">Next</button>
-    <button id="btn-solution">Solution</button>
+    <div class="container">
+      <h1>Building Act.js</h1>
+      <h4>To learn how React.js works.</h4>
+      <p>Open this file <b>index.html</b> in an editor of your choice</p>
+    </div>
+
+    <!--
+        Add a div element here that can be used to inject DOM elements.
+        As we need to find this "mount" or "root" element, it should also have
+        an id called "mount"
+    -->
+
+    <div class="container">
+      <p>
+        Open the DevTools of your browser — if you see an appropriate message from Act.js
+        you are ready to checkout <code>01-exercise</code> branch
+      </p>
+    </div>
   </body>
 
-  <script type="text/javascript" src="./src/playground.js"></script>
+  <!--
+      Add script tags to include the playground.js file from the src directory.
+      make sure to import it with type="module".
+    -->
+
+  <div class="container">
+    <button id="btn-next">Next</button>
+  </div>
+  <script type="text/javascript" src="./server/tutorial.js"></script>
 </html>
