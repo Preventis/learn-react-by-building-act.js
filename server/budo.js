@@ -24,8 +24,9 @@ budo('./src/playground.js', {
   wss.on('connection', ws => {
     ws.on('message', mess => {
       const message = JSON.parse(mess);
+      console.log(message);
       if (message.action === 'next') {
-        switchBranch(message.to);
+        //switchBranch(message.to);
       }
     });
   });
