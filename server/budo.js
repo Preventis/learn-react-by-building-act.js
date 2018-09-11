@@ -7,7 +7,7 @@ const childProcess = require('child_process');
 function switchBranch(name) {
   childProcess.exec(`git checkout ${name}`, (err, stdout) => {
     if (err) {
-      console.log('ERROR:', err);
+      console.log('ERROR: ', err);
     } else {
       console.log(`Switched to ${name}`);
     }
@@ -17,24 +17,33 @@ function switchBranch(name) {
 function switchBranchWithCommit(name) {
   const commitMessage = `EDIT-${os.hostname()}-${name}-${new Date().toISOString()}`;
   childProcess.exec('git diff', (err, stdout) => {
-    console.log(err, stdout);
+    if (err) {
+      console.log('ERROR: ', err);
+    } else {
+      // Nothing to commit
+      if (stdout.length === 0) {
+        switchBranch(name);
+      } else {
+        // Something to commit
+        childProcess.exec(
+          `git add -A && git commit -m ${commitMessage}`,
+          (err, stdout) => {
+            if (err) {
+              console.log('ERROR: ', err);
+            } else {
+              switchBranch(name);
+            }
+          }
+        );
+      }
+    }
   });
-  // childProcess.exec(
-  //   `git add -A && git commit -m ${commitMessage}`,
-  //   (err, stdout) => {
-  //     if (err) {
-  //       console.log('ERROR:', err);
-  //     } else {
-  //       switchBranch(name);
-  //     }
-  //   }
-  // );
 }
 
 function switchBranchWithStash(name) {
   childProcess.exec('git stash', (err, stdout) => {
     if (err) {
-      console.log('ERROR:', err);
+      console.log('ERROR: ', err);
     } else {
       switchBranch(name);
     }
