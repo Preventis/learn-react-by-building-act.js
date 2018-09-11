@@ -14,30 +14,31 @@ function switchBranch(name) {
   });
 }
 
-function switchBranchWithCommit(name) {
+function switchBranchWithCommit(name, budo) {
   const commitMessage = `EDIT-${os.hostname()}-${name}-${new Date().toISOString()}`;
-  childProcess.exec('git diff', (err, stdout) => {
-    if (err) {
-      console.log('ERROR: ', err);
-    } else {
-      // Nothing to commit
-      if (stdout.length === 0) {
-        switchBranch(name);
-      } else {
-        // Something to commit
-        childProcess.exec(
-          `git add -A && git commit -m ${commitMessage}`,
-          (err, stdout) => {
-            if (err) {
-              console.log('ERROR: ', err);
-            } else {
-              switchBranch(name);
-            }
-          }
-        );
-      }
-    }
-  });
+  budo.reload();
+  // childProcess.exec('git diff', (err, stdout) => {
+  //   if (err) {
+  //     console.log('ERROR: ', err);
+  //   } else {
+  //     // Nothing to commit
+  //     if (stdout.length === 0) {
+  //       switchBranch(name);
+  //     } else {
+  //       // Something to commit
+  //       childProcess.exec(
+  //         `git add -A && git commit -m ${commitMessage}`,
+  //         (err, stdout) => {
+  //           if (err) {
+  //             console.log('ERROR: ', err);
+  //           } else {
+  //             switchBranch(name);
+  //           }
+  //         }
+  //       );
+  //     }
+  //   }
+  // })
 }
 
 function switchBranchWithStash(name) {
@@ -50,7 +51,7 @@ function switchBranchWithStash(name) {
   });
 }
 
-budo('./src/playground.js', {
+const budo = budo('./src/playground.js', {
   live: true,
   stream: process.stdout,
   port: 8000,
@@ -64,10 +65,10 @@ budo('./src/playground.js', {
       const message = JSON.parse(mess);
       console.log('→ ', message);
       if (message.action === 'next') {
-        switchBranchWithCommit(message.to);
+        switchBranchWithCommit(message.to, budo);
       }
       if (message.action === 'solution') {
-        //switchBranch(message.to);
+        // TODO
       }
     });
   });
