@@ -42,12 +42,13 @@ function switchBranchWithCommit(name, budo) {
   });
 }
 
-function switchBranchWithStash(name) {
+function switchBranchWithStash(name, budo) {
   childProcess.exec('git stash', (err, stdout) => {
     if (err) {
       console.log('ERROR: ', err);
     } else {
       switchBranch(name);
+      budo.reload('/');
     }
   });
 }
@@ -65,11 +66,11 @@ const b = budo('./src/playground.js', {
     ws.on('message', mess => {
       const message = JSON.parse(mess);
       console.log('→ ', message);
-      if (message.action === 'next') {
+      if (message.action === 'next-commit') {
         switchBranchWithCommit(message.to, b);
       }
-      if (message.action === 'solution') {
-        // TODO
+      if (message.action === 'next-stash') {
+        switchBranchWithStash(message.to, b);
       }
     });
   });
