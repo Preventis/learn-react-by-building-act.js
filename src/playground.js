@@ -4,84 +4,96 @@ import { Act, ActDOM } from './act.js';
 
 const root = document.querySelector('#mount');
 
-// --- Exercise 08/Rerender-Part1
-// As you may have noticed the updated state is set correctly but doesn't
-// get propagated into the DOM and the webpage is not updated properly.
-// The CountingCounter doesn't yet re-render when it's state or passed data
-// changes.
+// --- Exercise 11/Todo-App
+const TodoItem = ({ text, index, onClick }) => {
+  const textElement = Act.createElement(
+    'h5',
+    { className: 'columns six' },
+    text
+  );
+  const removeButton = Act.createElement(
+    'button',
+    {
+      className: 'columns two',
+      onClick: onClick
+    },
+    'X'
+  );
+  return Act.createElement(
+    'div',
+    { className: 'row' },
+    textElement,
+    removeButton
+  );
+};
 
-// This is due to we haven't yet implemented one of React's core principles:
-// Diffing the DOM structure.
+const TodoForm = ({ onClick }) => {
+  const title = Act.createElement(
+    'b',
+    { className: 'columns two' },
+    'New TODO: '
+  );
+  const inputForm = Act.createElement('input', { className: 'columns four' });
+  const addButton = Act.createElement(
+    'button',
+    {
+      className: 'columns two',
+      onClick: onClick
+    },
+    'ADD'
+  );
+  return Act.createElement(
+    'div',
+    { className: 'row' },
+    title,
+    inputForm,
+    addButton
+  );
+};
 
-// Currently we are only swapping the class component in act.js
-// But we also have to check if the component should re-render
-
-// You can now switch to act.js for implementing this feature
-class ValueField extends Act.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    const { value } = this.props;
-    console.log(value);
-    return Act.createElement(
-      'h3',
-      { className: 'three columns' },
-      `Value: ${value}`
-    );
-  }
-}
-
-class CountingCounter extends Act.Component {
+class TodoApp extends Act.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: 0
+      todos: [{ text: 'Build react.js' }, { text: 'Finish this exercise' }]
     };
   }
 
-  decrement() {
-    this.setState({ value: this.state.value - 1 });
+  removeTodo(index) {
+    console.log(index);
+    const newTodos = this.state.todos.filter((t, i) => i != index);
+    this.setState({ todos: newTodos });
   }
 
-  increment() {
-    this.setState({ value: this.state.value + 1 });
+  addTodo(ev) {
+    const target = ev.target;
+    const inputText = target.parentNode.querySelector('input').value;
+    const newTodos = this.state.todos.concat([{ text: inputText }]);
+    this.setState({ todos: newTodos });
   }
 
   render() {
-    const { value } = this.state;
-    const title = Act.createElement('h1', null, 'A Working Counter');
-    const subtractButton = Act.createElement(
-      'button',
-      {
-        className: 'two columns',
-        onClick: this.decrement.bind(this)
-      },
-      '-'
+    const { todos } = this.state;
+    const title = Act.createElement('h4', {}, 'Todos:');
+    const todoElements = todos.map((todo, i) =>
+      Act.createElement(
+        TodoItem,
+        { text: todo.text, onClick: this.removeTodo.bind(this, i) },
+        ''
+      )
     );
-    const valueText = Act.createElement(ValueField, {
-      value: value
+    const todoForm = Act.createElement(TodoForm, {
+      onClick: this.addTodo.bind(this)
     });
-    const addButton = Act.createElement(
-      'button',
-      {
-        className: 'two columns',
-        onClick: this.increment.bind(this)
-      },
-      '+'
-    );
     return Act.createElement(
       'div',
-      { className: 'row' },
+      { className: 'app' },
       title,
-      subtractButton,
-      valueText,
-      addButton
+      todoForm,
+      todoElements
     );
   }
 }
 
-const workingCounter = Act.createElement(CountingCounter);
-ActDOM.render(workingCounter, root);
+ActDOM.render(Act.createElement(TodoApp), root);
 

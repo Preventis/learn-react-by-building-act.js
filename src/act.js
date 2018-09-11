@@ -81,7 +81,6 @@ const Act = {
       // and return the application of the function
       // pass properties to the creation of stateless function components
       const statlessComponent = element(properties);
-      statlessComponent.type = this.ACT_TAG;
       return statlessComponent;
     } else {
       // else return the code below for the ability to create
