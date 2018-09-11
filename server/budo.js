@@ -16,16 +16,19 @@ function switchBranch(name) {
 
 function switchBranchWithCommit(name) {
   const commitMessage = `EDIT-${os.hostname()}-${name}-${new Date().toISOString()}`;
-  childProcess.exec(
-    `git add -A && git commit -m ${commitMessage}`,
-    (err, stdout) => {
-      if (err) {
-        console.log('ERROR:', err);
-      } else {
-        switchBranch(name);
-      }
-    }
-  );
+  childProcess.exec('git diff', (err, stdout) => {
+    console.log(err, stdout);
+  });
+  // childProcess.exec(
+  //   `git add -A && git commit -m ${commitMessage}`,
+  //   (err, stdout) => {
+  //     if (err) {
+  //       console.log('ERROR:', err);
+  //     } else {
+  //       switchBranch(name);
+  //     }
+  //   }
+  // );
 }
 
 function switchBranchWithStash(name) {
