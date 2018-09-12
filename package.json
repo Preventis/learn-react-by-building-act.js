@@ -1,19 +1,29 @@
 {
-  "name": "building-actjs",
+  "name": "build-react-exercise",
   "version": "1.0.0",
-  "description": "Learning React by construction",
-  "main": "index.html",
+  "description": "#### Workflow",
+  "main": "index.js",
   "dependencies": {
-    "babelify": "^10.0.0",
-    "budo": "^11.3.2"
+    "ws": "^6.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
-    "@babel/preset-env": "^7.0.0"
+    "@babel/preset-env": "^7.0.0",
+    "babelify": "^10.0.0",
+    "budo": "^11.3.2"
   },
   "scripts": {
-    "start": "budo src/playground.js --live --open -- -t babelify"
+    "prestart": "npm install",
+    "start": "node server/budo.js"
   },
-  "author": "Guido Schmidt",
-  "license": "MIT"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guidoschmidt/react-by-construction.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/guidoschmidt/react-by-construction/issues"
+  },
+  "homepage": "https://github.com/guidoschmidt/react-by-construction#readme"
 }
