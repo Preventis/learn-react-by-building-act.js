@@ -25,7 +25,8 @@ branches to your liking.
 
 ### Start the tutorial
 
-`npm start`
+1. `npm start`
+2. open [127.0.0.1:8000](http://127.0.0.1:8000) in your browser
 
 Feel free to either checkout code-examples by switching branches to your liking
 
