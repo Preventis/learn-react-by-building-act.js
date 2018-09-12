@@ -1,10 +1,12 @@
 ##### Learning React.js by Contstruction
-# Building Act.js
+
+![Building Act.js](./logo.png)
+
 ### Handcraft your own version of React.js
 
-…To learn the core principles and ideas behind React.js
+**…To learn the core principles and ideas behind React.js**
 
-This repository tries to give a step-by-step tutorial on how React.js
+This repository tries to give a **step-by-step tutorial** on how React.js
 works and tries to convey it's core ideas.
         
 There are a bunch of branches named <code>exericse-XX/topic</code> and 
@@ -17,7 +19,9 @@ branches to your liking.
 
 ---
 
-### Starting
+### Start the tutorial
 
 `npm start`
+
+Feel free to either checkout code-examples by switching branches to your liking
 
