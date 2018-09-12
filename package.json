@@ -13,6 +13,7 @@
     "budo": "^11.3.2"
   },
   "scripts": {
+    "prestart": "npm install",
     "start": "node server/budo.js"
   },
   "repository": {
