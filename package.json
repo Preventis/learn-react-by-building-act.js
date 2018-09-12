@@ -13,7 +13,7 @@
     "budo": "^11.3.2"
   },
   "scripts": {
-    "start": "node server/budo.js" 
+    "start": "node server/budo.js"
   },
   "repository": {
     "type": "git",
