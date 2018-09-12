@@ -1,9 +1,13 @@
-##### Learning React.js by Contstruction
+<p align="center">
+<br>
+<br>
+<br>
+<img src="logo.png" alt="Building Act.js"/>
 
-![Building Act.js](./logo.png)
+<h1 align="center">Handcraft your own version of React.js</a></h1>
+</p>
 
-### Handcraft your own version of React.js
-
+##### — Learning React.js by Contstruction
 **…To learn the core principles and ideas behind React.js**
 
 This repository tries to give a **step-by-step tutorial** on how React.js
