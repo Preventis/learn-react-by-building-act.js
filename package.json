@@ -13,7 +13,8 @@
     "budo": "^11.3.2"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prestart": "npm install",
+    "start": "node server/budo.js"
   },
   "repository": {
     "type": "git",
