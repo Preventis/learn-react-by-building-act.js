@@ -14,7 +14,7 @@ const Act = {
     // You can use isClass from the helpers.js module to check for classes
     if (typeof element === 'function') {
       return element();
-    } else {
+    } else if (typeof element === 'function') {
       // else return the code below for the ability to create
       // default DOM node elements further on.
       const el = document.createElement(element);
@@ -31,7 +31,6 @@ const Act = {
           el.innerHTML += child;
         }
       });
-
       return el;
     }
   }
