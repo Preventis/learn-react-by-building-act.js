@@ -1,3 +1,5 @@
+import '../src/playground.js';
+
 const ws = new WebSocket('ws://localhost:4444');
 
 const tutorialNav = document.querySelector('#tutorial-nav');
