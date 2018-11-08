@@ -4,13 +4,13 @@
   "description": "#### Workflow",
   "main": "index.js",
   "dependencies": {
-    "ws": "^6.0.0"
+    "ws": "^6.1.0"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
+    "@babel/core": "^7.1.5",
+    "@babel/preset-env": "^7.1.5",
     "babelify": "^10.0.0",
-    "budo": "^11.3.2"
+    "budo": "^11.5.0"
   },
   "scripts": {
     "prestart": "npm install",
